@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Extractor</title>
+    <script>
+        function extractEmails() {
+            var inputText = document.getElementById('textInput').value;
+            var emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
+            var emails = inputText.match(emailRegex);
+            if (emails) {
+                document.getElementById('emailOutput').value = emails.join('\n');
+            } else {
+                document.getElementById('emailOutput').value = "No emails found.";
+            }
+        }
+
+        function copyToClipboard() {
+            var outputText = document.getElementById('emailOutput');
+            outputText.select();
+            document.execCommand('copy');
+        }
+    </script>
+</head>
+<body>
+    <h2>Email Extractor</h2>
+    <textarea id="textInput" placeholder="Enter text with emails here..." rows="10" cols="50"></textarea>
+    <br>
+    <button onclick="extractEmails()">Extract Emails</button>
+    <br>
+    <textarea id="emailOutput" placeholder="Extracted emails will appear here..." rows="10" cols="50" readonly></textarea>
+    <br>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+</body>
+</html>
